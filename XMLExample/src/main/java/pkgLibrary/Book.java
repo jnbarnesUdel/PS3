@@ -17,6 +17,7 @@ public class Book {
 	private Date publish_date;
 	private String description;
 	private double cost;
+	//Test
 
 	public Book() {
 
