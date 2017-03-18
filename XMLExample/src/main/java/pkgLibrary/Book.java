@@ -1,5 +1,6 @@
 package pkgLibrary;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -15,24 +16,42 @@ public class Book {
 	private double price;
 	private Date publish_date;
 	private String description;
+	private double cost;
 
 	public Book() {
 
 	}
-
-	public Book(String id, String author, String title, String genre, double price, Date publish_date, String description)
+	
+	public Book(Catalog cat, String passedBookId)
 	{
+		for (Book b: cat.getBooks())
+		{
+			if(b.getId() == passedBookId)
+			{
+				this.id = b.id;
+				this.author = b.author;
+				this.title = b.title;
+				this.title = b.title;
+				this.genre = b.genre;
+				this.price = b.price;
+				this.publish_date = b.publish_date;
+				this.description = b.description;
+				this.cost = b.cost;
+			}
+		}
+	}
+
+	public Book(String id, String author, String title, String genre, double price, Date publish_date,
+			String description) {
 		super();
 		this.id = id;
 		this.author = author;
 		this.title = title;
-		this.genre = genre;		
+		this.genre = genre;
 		this.price = price;
 		this.publish_date = publish_date;
 		this.description = description;
 	}
-	
- 
 
 	public String getId() {
 		return id;
@@ -97,7 +116,25 @@ public class Book {
 		this.description = description;
 	}
 
+	public double getCost() {
+		return cost;
+	}
 	
+	@XmlElement
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
 	
-
+	public ArrayList<Book> addBook(Catalog cat, Book a)
+	{
+		for(Book b : cat.getBooks())
+		{
+			if(b == a)
+			{
+				return cat.getBooks();
+			}
+		}
+		cat.getBooks().add(a);
+		return cat.getBooks();
+	}
 }

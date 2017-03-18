@@ -33,9 +33,10 @@ public class Catalog {
 		this.books = books;
 	}
 	
-
-	
-	
+	public Book GetBook()
+	{
+		return books.get(getId());
+	}
 
 
 	
